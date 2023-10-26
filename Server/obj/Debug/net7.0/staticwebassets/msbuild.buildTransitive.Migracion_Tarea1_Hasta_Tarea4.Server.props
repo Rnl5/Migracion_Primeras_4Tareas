@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\Migracion_Tarea1_Hasta_Tarea4.Server.props" />
+</Project>

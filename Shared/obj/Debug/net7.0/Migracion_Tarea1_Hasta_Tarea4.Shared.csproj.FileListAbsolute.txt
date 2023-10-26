@@ -1,0 +1,11 @@
+C:\APLICADA1\Migracion_Tarea1_Hasta_Tarea4\Shared\bin\Debug\net7.0\Migracion_Tarea1_Hasta_Tarea4.Shared.deps.json
+C:\APLICADA1\Migracion_Tarea1_Hasta_Tarea4\Shared\bin\Debug\net7.0\Migracion_Tarea1_Hasta_Tarea4.Shared.dll
+C:\APLICADA1\Migracion_Tarea1_Hasta_Tarea4\Shared\bin\Debug\net7.0\Migracion_Tarea1_Hasta_Tarea4.Shared.pdb
+C:\APLICADA1\Migracion_Tarea1_Hasta_Tarea4\Shared\obj\Debug\net7.0\Migracion_Tarea1_Hasta_Tarea4.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\APLICADA1\Migracion_Tarea1_Hasta_Tarea4\Shared\obj\Debug\net7.0\Migracion_Tarea1_Hasta_Tarea4.Shared.AssemblyInfoInputs.cache
+C:\APLICADA1\Migracion_Tarea1_Hasta_Tarea4\Shared\obj\Debug\net7.0\Migracion_Tarea1_Hasta_Tarea4.Shared.AssemblyInfo.cs
+C:\APLICADA1\Migracion_Tarea1_Hasta_Tarea4\Shared\obj\Debug\net7.0\Migracion_Tarea1_Hasta_Tarea4.Shared.csproj.CoreCompileInputs.cache
+C:\APLICADA1\Migracion_Tarea1_Hasta_Tarea4\Shared\obj\Debug\net7.0\Migracion_Tarea1_Hasta_Tarea4.Shared.dll
+C:\APLICADA1\Migracion_Tarea1_Hasta_Tarea4\Shared\obj\Debug\net7.0\refint\Migracion_Tarea1_Hasta_Tarea4.Shared.dll
+C:\APLICADA1\Migracion_Tarea1_Hasta_Tarea4\Shared\obj\Debug\net7.0\Migracion_Tarea1_Hasta_Tarea4.Shared.pdb
+C:\APLICADA1\Migracion_Tarea1_Hasta_Tarea4\Shared\obj\Debug\net7.0\ref\Migracion_Tarea1_Hasta_Tarea4.Shared.dll
