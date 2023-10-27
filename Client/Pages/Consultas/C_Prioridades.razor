@@ -1,0 +1,88 @@
+@page "/consultaPrioridades"
+
+@inject HttpClient httpClient
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <head>
+                <h1>Consulta de Prioridades</h1>
+            </head>
+        </div>
+
+        <div class="card-body">
+            <body>
+                <a href="/registroPrioridades"><button type="button" class="btn btn-outline-info"><i class="oi oi-plus">Agregar Nueva Prioridad</i></button></a>
+            
+                
+                <div class = "row">
+                    @*Campo para buscar por Id*@
+                    <div class ="col">
+                        <label>Buscar por Id</label>
+                        <InputNumber class="form-control" @bind-Value="prioridadId" aria-placeholder="BusquedaId"> </InputNumber>
+                    </div>
+
+                        @*Boton Buscar*@
+                        <div class="col">
+                           <button type ="button" class="btn btn-outline-primary" @onclick="Buscar"> <i class="oi oi-reload"> Buscar</i></button>
+                        </div>
+                </div>
+
+
+                @if (prioridades is not null)
+                {
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>PrioridadId</th>
+                                <th>Descripci&oacute;n</th>
+                                <th>Dias de Compromiso</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var prioridad in prioridades)
+                            {
+                                <tr>
+                                    <td>@prioridad.PrioridadId</td>
+                                    <td>@prioridad.Descripcion</td>
+                                    <td>@prioridad.DiasCompromiso</td>
+                                    <td><a href="/registroPrioridades/@prioridad.PrioridadId"><button type ="button" class ="btn btn-outline-primary"><i class="oi oi-eye" ></i> Ver</button></a></td>
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+                }
+
+            </body>
+        </div>
+    </div>
+</div>
+
+
+@code
+{
+    public List<Prioridades> prioridades {get; set;} = new List<Prioridades>();
+     public int prioridadId{get; set;}
+
+
+    
+    protected override async Task OnInitializedAsync()
+    {
+    }
+
+    public async Task Buscar()
+    {
+        prioridades = await httpClient.GetFromJsonAsync<List<Prioridades>>($"api/Prioridades");
+
+        if(prioridadId > 0)
+        {
+            prioridades = prioridades.Where(p => p.PrioridadId == prioridadId).ToList();
+        }
+        StateHasChanged();   
+    }
+
+}
