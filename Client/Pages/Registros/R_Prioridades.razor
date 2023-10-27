@@ -1,0 +1,200 @@
+@page "/registroPrioridades"
+@page "/registroPrioridades/{PrioridadId:int}"
+
+@inject NotificationService notificationService
+@inject HttpClient httpClient
+
+
+<EditForm Model="prioridad" OnValidSubmit="Guardar">
+    <DataAnnotationsValidator />
+
+    <div class="container">
+        <div class="card">
+            <div class ="card-header">
+                <head>
+                    <h1>Registro de Prioridades</h1>
+                </head>
+            </div>
+
+            <div class ="card-body">
+                <body>
+                    <label>Id</label>
+                    <div class="col-3">
+                        <div class="input-group mb-3">
+                            <InputNumber class="form-control" @bind-Value="prioridad.PrioridadId" aria-describedby="BotonBuscarId"></InputNumber>
+                            <button class="btn btn-outline-primary" @onclick="Buscar"><i class="oi oi-magnifying-glass"></i></button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label>Descripci&oacute;n</label>
+                            <div class="input-group mb-3">
+                                <InputTextArea class="form-control" @bind-Value="prioridad.Descripcion" aria-describedby="DescripcionPrioridad"></InputTextArea>
+                                <ValidationMessage For="@(() => prioridad.Descripcion)"></ValidationMessage>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <label>Dias Compromiso</label>
+                            <div class="input-group mb-3">
+                                <InputNumber class="form-control" @bind-Value="prioridad.DiasCompromiso" aria-describedby="DiasCompromiso"></InputNumber>
+                                <ValidationMessage For="@(() => prioridad.DiasCompromiso)"></ValidationMessage>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-outline-primary" @onclick="Nuevo"><i class="oi oi-file">Nuevo</i></button>
+                        <button type ="submit" class="btn btn-outline-success"><i class="oi oi-document">Guardar</i></button>
+                        <button type="button" class="btn btn-outline-danger" @onclick="Eliminar"><i class="oi oi-trash">Eliminar</i></button>
+                    </div>
+                </body>
+            </div>
+        </div>
+    </div>
+    
+</EditForm>
+
+@code
+{
+
+    [Parameter]
+    public int PrioridadId {get; set;}
+
+    public Prioridades prioridad {get; set;} = new Prioridades();
+
+    public NotificationMessage Mensaje {get; set;} = new NotificationMessage();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        if(PrioridadId > 0)
+        {
+            prioridad.PrioridadId = PrioridadId;
+            await Buscar();
+        } 
+    }
+
+    public async Task Buscar()
+    {
+        var prioridadEncontrada = await httpClient.GetFromJsonAsync<Prioridades>($"api/Prioridades/{prioridad.PrioridadId}");
+        
+        if(prioridadEncontrada != null)
+        {
+            prioridad = prioridadEncontrada;
+            StateHasChanged();
+        }
+        else
+        {
+            //Mensaje de error al encontrar
+        }
+    }
+
+    public void Nuevo()
+    {
+        prioridad = new Prioridades();    
+    }
+
+    public async Task Guardar()
+    {
+        if(ValidarCasillasVacias())
+        {
+           Mensaje = new NotificationMessage 
+            {
+                Severity = NotificationSeverity.Error,
+                Summary = "Error: Casilla/s vacia/s",
+                Detail = "Una o varias casillas se encuentran vacias",
+                Duration = 4_000
+            };
+            notificationService.Notify(Mensaje);
+            return;
+        }
+
+        if(Validar())
+        {
+            Mensaje = new NotificationMessage 
+            {
+                Severity = NotificationSeverity.Error,
+                Summary = "Error: El ID es menor a 0",
+                Detail = "Verifique si ha colocado el ID menor a 0",
+                Duration = 4_000
+            };
+        notificationService.Notify(Mensaje);
+        return;
+        }
+
+        using var response = await httpClient.PostAsJsonAsync("api/Prioridades", prioridad);
+        
+        if(!response.IsSuccessStatusCode)
+        {
+            return;
+        }
+
+        var prioridadDevuelta = await response.Content.ReadFromJsonAsync<Prioridades>();
+
+        if(prioridadDevuelta is not null)
+        {
+            prioridad = prioridadDevuelta;
+
+            StateHasChanged();
+            Nuevo();
+
+            Mensaje = new NotificationMessage 
+            {
+                Severity = NotificationSeverity.Success,
+                Summary = "Exito al guardar",
+                Detail = "Ha guardado con exito la prioridad",
+                Duration = 4_000
+            };
+            notificationService.Notify(Mensaje);
+        }
+    }
+
+    public async Task Eliminar()
+    {
+        if(ValidarCasillasVacias())
+        {
+            Mensaje = new NotificationMessage 
+            {
+                Severity = NotificationSeverity.Error,
+                Summary = "Error: No hay datos",
+                Detail = "Hay una o varias casillas obligatorias vacias",
+                Duration = 4_000
+            };
+        notificationService.Notify(Mensaje);
+            return;
+        }
+
+        using var response = await httpClient.DeleteAsync($"api/Prioridades/{prioridad.PrioridadId}");
+
+        if(!response.IsSuccessStatusCode)
+        {
+            return;
+        }
+
+        else
+        {
+            Nuevo();
+            Mensaje = new NotificationMessage 
+            {
+                Severity = NotificationSeverity.Success,
+                Summary = "Prioridad Eliminada",
+                Detail = "Se ha eliminado correctamente la prioridad",
+                Duration = 4_000
+            };
+            notificationService.Notify(Mensaje);
+        }
+    }
+
+    public bool ValidarCasillasVacias()
+    {
+        return string.IsNullOrEmpty(prioridad.Descripcion) ||
+                prioridad.DiasCompromiso == 0;
+    }
+
+    public bool Validar()
+    {
+        return prioridad.PrioridadId < 0;
+    }
+
+}
