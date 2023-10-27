@@ -1,0 +1,189 @@
+@page "/registroSistemas"
+@page "/registroSistemas/{SistemaId:int}"
+
+@inject NotificationService notificationService
+@inject HttpClient httpClient
+
+
+<EditForm Model="sistema" OnValidSubmit="Guardar">
+    <DataAnnotationsValidator />
+
+    <div class="container">
+        <div class="card">
+            <div class ="card-header">
+                <head>
+                    <h1>Registro de Sistemas</h1>
+                </head>
+            </div>
+
+            <div class ="card-body">
+                <body>
+                    <label>Id</label>
+                    <div class="col-3">
+                        <div class="input-group mb-3">
+                            <InputNumber class="form-control" @bind-Value="sistema.SistemaId" aria-describedby="BotonBuscarId"></InputNumber>
+                            <button class="btn btn-outline-primary" @onclick="Buscar"><i class="oi oi-magnifying-glass"></i></button>
+                        </div>
+                    </div>
+                        <div class="col">
+                            <label>Nombre</label>
+                            <div class="input-group mb-3">
+                                <InputTextArea class="form-control" @bind-Value="sistema.Nombre" aria-describedby="NombreSistema"></InputTextArea>
+                                <ValidationMessage For="@(() => sistema.Nombre)"></ValidationMessage>
+                            </div>
+                        </div>
+
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-outline-primary" @onclick="Nuevo"><i class="oi oi-file">Nuevo</i></button>
+                        <button type ="submit" class="btn btn-outline-success"><i class="oi oi-document">Guardar</i></button>
+                        <button type="button" class="btn btn-outline-danger" @onclick="Eliminar"><i class="oi oi-trash">Eliminar</i></button>
+                    </div>
+                </body>
+            </div>
+        </div>
+    </div>
+    
+</EditForm>
+
+@code
+{
+
+    [Parameter]
+    public int SistemaId {get; set;}
+
+    public Sistemas sistema {get; set;} = new Sistemas();
+
+    public NotificationMessage Mensaje {get; set;} = new NotificationMessage();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        if(SistemaId > 0)
+        {
+            sistema.SistemaId = SistemaId;
+            await Buscar();
+        } 
+    }
+
+    public async Task Buscar()
+    {
+        var sistemaEncontrado = await httpClient.GetFromJsonAsync<Sistemas>($"api/Sistemas/{sistema.SistemaId}");
+        
+        if(sistemaEncontrado != null)
+        {
+            sistema = sistemaEncontrado;
+            StateHasChanged();
+        }
+        else
+        {
+            //Mensaje de error al encontrar
+        }
+    }
+
+    public void Nuevo()
+    {
+        sistema = new Sistemas();    
+    }
+
+    public async Task Guardar()
+    {
+        if(ValidarCasillasVacias())
+        {
+           Mensaje = new NotificationMessage 
+            {
+                Severity = NotificationSeverity.Error,
+                Summary = "Error: Casilla/s vacia/s",
+                Detail = "Una o varias casillas se encuentran vacias",
+                Duration = 4_000
+            };
+            notificationService.Notify(Mensaje);
+            return;
+        }
+
+        if(Validar())
+        {
+            Mensaje = new NotificationMessage 
+            {
+                Severity = NotificationSeverity.Error,
+                Summary = "Error: El ID es menor a 0",
+                Detail = "Verifique si ha colocado el ID menor a 0",
+                Duration = 4_000
+            };
+        notificationService.Notify(Mensaje);
+        return;
+        }
+
+        using var response = await httpClient.PostAsJsonAsync("api/Sistemas", sistema);
+        
+        if(!response.IsSuccessStatusCode)
+        {
+            return;
+        }
+
+        var sistemaDevuelto = await response.Content.ReadFromJsonAsync<Sistemas>();
+
+        if(sistemaDevuelto is not null)
+        {
+            sistema = sistemaDevuelto;
+
+            StateHasChanged();
+            Nuevo();
+
+            Mensaje = new NotificationMessage 
+            {
+                Severity = NotificationSeverity.Success,
+                Summary = "Exito al guardar",
+                Detail = "Ha guardado con exito el Sistema",
+                Duration = 4_000
+            };
+            notificationService.Notify(Mensaje);
+        }
+    }
+
+    public async Task Eliminar()
+    {
+        if(ValidarCasillasVacias())
+        {
+            Mensaje = new NotificationMessage 
+            {
+                Severity = NotificationSeverity.Error,
+                Summary = "Error: No hay datos",
+                Detail = "Hay una o varias casillas obligatorias vacias",
+                Duration = 4_000
+            };
+        notificationService.Notify(Mensaje);
+            return;
+        }
+
+        using var response = await httpClient.DeleteAsync($"api/Sistemas/{sistema.SistemaId}");
+
+        if(!response.IsSuccessStatusCode)
+        {
+            return;
+        }
+
+        else
+        {
+            Nuevo();
+            Mensaje = new NotificationMessage 
+            {
+                Severity = NotificationSeverity.Success,
+                Summary = "Sistema Eliminado",
+                Detail = "Se ha eliminado correctamente el sistema",
+                Duration = 4_000
+            };
+            notificationService.Notify(Mensaje);
+        }
+    }
+
+    public bool ValidarCasillasVacias()
+    {
+        return string.IsNullOrEmpty(sistema.Nombre);
+    }
+
+    public bool Validar()
+    {
+        return sistema.SistemaId < 0;
+    }
+
+}
