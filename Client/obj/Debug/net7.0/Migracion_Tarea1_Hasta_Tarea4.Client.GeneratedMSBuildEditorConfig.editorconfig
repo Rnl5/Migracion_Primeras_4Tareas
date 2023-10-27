@@ -20,12 +20,20 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/APLICADA1/Migracion_Tarea1_Hasta_Tarea4/Client/Pages/Consultas/C_Clientes.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uc3VsdGFzXENfQ2xpZW50ZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/APLICADA1/Migracion_Tarea1_Hasta_Tarea4/Client/Pages/Consultas/C_Prioridades.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29uc3VsdGFzXENfUHJpb3JpZGFkZXMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/APLICADA1/Migracion_Tarea1_Hasta_Tarea4/Client/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/APLICADA1/Migracion_Tarea1_Hasta_Tarea4/Client/Pages/Registros/R_Clientes.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVnaXN0cm9zXFJfQ2xpZW50ZXMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/APLICADA1/Migracion_Tarea1_Hasta_Tarea4/Client/Pages/Registros/R_Prioridades.razor]
