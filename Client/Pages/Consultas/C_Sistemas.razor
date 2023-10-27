@@ -1,0 +1,78 @@
+@page "/consultaSistemas"
+
+@inject HttpClient httpClient
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <head>
+                <h1>Consulta de Sistemas</h1>
+            </head>
+        </div>
+
+        <div class="card-body">
+            <body>
+                <a href="/registroSistemas"><button type="button" class="btn btn-outline-info"><i class="oi oi-plus">Agregar Nuevo Sistema</i></button></a>
+            
+                
+                <div class = "row">
+                    <div class ="col">
+                        <label>Buscar por Id</label>
+                        <InputNumber class="form-control" @bind-Value="sistemaId" aria-placeholder="BusquedaId"> </InputNumber>
+                    </div>
+
+                        
+                        <div class="col">
+                           <button type ="button" class="btn btn-outline-primary" @onclick="Buscar"> <i class="oi oi-reload"> Buscar</i></button>
+                        </div>
+                </div>
+
+
+                @if (sistemas is not null)
+                {
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>SistemaId</th>
+                                <th>Nombre</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var sistema in sistemas)
+                            {
+                                <tr>
+                                    <td>@sistema.SistemaId</td>
+                                    <td>@sistema.Nombre</td>
+                                    <td><a href="/registroSistemas/@sistema.SistemaId"><button type ="button" class ="btn btn-outline-primary"><i class="oi oi-eye" ></i> Ver</button></a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            </body>
+        </div>
+    </div>
+</div>
+
+
+@code
+{
+    public List<Sistemas> sistemas {get; set;} = new List<Sistemas>();
+    public int sistemaId {get; set;}
+
+    protected override async Task OnInitializedAsync()
+    { }
+
+    public async Task Buscar()
+    {
+        sistemas = await httpClient.GetFromJsonAsync<List<Sistemas>>($"api/Sistemas");
+
+        if(sistemaId > 0)
+        {
+            sistemas = sistemas.Where(s => s.SistemaId == sistemaId).ToList();
+        }
+        StateHasChanged();   
+    }
+}
