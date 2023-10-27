@@ -834,3 +834,11 @@ C:\APLICADA1\Migracion_Tarea1_Hasta_Tarea4\Client\obj\Debug\net7.0\Migracion_Tar
 C:\APLICADA1\Migracion_Tarea1_Hasta_Tarea4\Client\obj\Debug\net7.0\refint\Migracion_Tarea1_Hasta_Tarea4.Client.dll
 C:\APLICADA1\Migracion_Tarea1_Hasta_Tarea4\Client\obj\Debug\net7.0\Migracion_Tarea1_Hasta_Tarea4.Client.pdb
 C:\APLICADA1\Migracion_Tarea1_Hasta_Tarea4\Client\obj\Debug\net7.0\ref\Migracion_Tarea1_Hasta_Tarea4.Client.dll
+C:\APLICADA1\Migracion_Tarea1_Hasta_Tarea4\Client\bin\Debug\net7.0\wwwroot\_framework\Radzen.Blazor.dll
+C:\APLICADA1\Migracion_Tarea1_Hasta_Tarea4\Client\bin\Debug\net7.0\wwwroot\_framework\System.Linq.Dynamic.Core.dll
+C:\APLICADA1\Migracion_Tarea1_Hasta_Tarea4\Client\bin\Debug\net7.0\wwwroot\_framework\Radzen.Blazor.dll.gz
+C:\APLICADA1\Migracion_Tarea1_Hasta_Tarea4\Client\bin\Debug\net7.0\wwwroot\_framework\System.Linq.Dynamic.Core.dll.gz
+C:\APLICADA1\Migracion_Tarea1_Hasta_Tarea4\Client\bin\Debug\net7.0\Radzen.Blazor.dll
+C:\APLICADA1\Migracion_Tarea1_Hasta_Tarea4\Client\bin\Debug\net7.0\System.Linq.Dynamic.Core.dll
+C:\APLICADA1\Migracion_Tarea1_Hasta_Tarea4\Client\obj\Debug\net7.0\build-gz\b1nVEC0J.gz
+C:\APLICADA1\Migracion_Tarea1_Hasta_Tarea4\Client\obj\Debug\net7.0\build-gz\mQO3dt42.gz

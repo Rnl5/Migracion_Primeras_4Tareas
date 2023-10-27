@@ -29,7 +29,9 @@
       "Microsoft.Extensions.Primitives.dll": "sha256-q4ruoDSCjV\/QJY9ZkzV6uxvEvZUVrDbyUjU3SSh5SlE=",
       "Microsoft.JSInterop.dll": "sha256-ZglXsTJFg7gIPbFdWyqdUxrG4L+2H\/eEGtGJgrf3mls=",
       "Microsoft.JSInterop.WebAssembly.dll": "sha256-uXNdaB5ieiQN17JUqeAopa3nh1z3wh+cyXpIYXeILzo=",
+      "Radzen.Blazor.dll": "sha256-lJ9rnQF7iNO6aUi2jt4Y3MYaFFnhwxxlaxvOGQrYZgI=",
       "System.IO.Pipelines.dll": "sha256-P\/MqD0fCBd5bgTM16JC1QC\/Zz7s+CwViyzmDFkBG4\/c=",
+      "System.Linq.Dynamic.Core.dll": "sha256-BBgVLrtvFKoZ6SbCxHRdzr9oeUHvnuQLfM8gRAFgDQc=",
       "Microsoft.CSharp.dll": "sha256-X69dv0Kcp5aCpsjyp0kh0E28KK1Z47p8anZQiQU8Irc=",
       "Microsoft.VisualBasic.Core.dll": "sha256-gqaDZ2GcFZADYOQ\/y+hWgkBU2p6w7DvAVQkHGZQAK44=",
       "Microsoft.VisualBasic.dll": "sha256-VYg98zaNa2dh6k4p\/0zRnCqPdp1qtrJ\/Hl\/7CVfsMDc=",
@@ -198,15 +200,15 @@
       "mscorlib.dll": "sha256-Xo3wdLenBZ41X73hGjkWTbEQZDKcQsnPFtlkePUxLY0=",
       "netstandard.dll": "sha256-qjqaAEP3hdLnU\/TnoCd8HaSa+0ruV1TpdaB2GUujGMw=",
       "System.Private.CoreLib.dll": "sha256-\/7uQ+eNo9u3H1mpgMko4D3tKZHeGRfsRjna0Dqsu62k=",
-      "Migracion_Tarea1_Hasta_Tarea4.Shared.dll": "sha256-R\/RfdPKckmc7rLaPTp3JuA5M7oyytGlc2PDtb12S4Fc=",
-      "Migracion_Tarea1_Hasta_Tarea4.Client.dll": "sha256-tMuarxErBld3PsDLxBN39jfkqFKUyuKAebnHuRvpLgM="
+      "Migracion_Tarea1_Hasta_Tarea4.Shared.dll": "sha256-4SuOR25BNiiJXz4FqbiUHmMH5u+dTTh2jVBaKh\/fCfM=",
+      "Migracion_Tarea1_Hasta_Tarea4.Client.dll": "sha256-lDCrU7XA85QNzw1GNxbjWQcRl7xglzoP0aqTHHv5\/3s="
     },
     "extensions": null,
     "lazyAssembly": null,
     "libraryInitializers": null,
     "pdb": {
-      "Migracion_Tarea1_Hasta_Tarea4.Shared.pdb": "sha256-2ayMrDwc2Mw9fvl945jiDBVLA39UwNrtvuf9Owfpj8U=",
-      "Migracion_Tarea1_Hasta_Tarea4.Client.pdb": "sha256-7jUTsrYGZwX0wBoDfCkDiUA9HKVWn\/E4Xa4hc0bZlmE="
+      "Migracion_Tarea1_Hasta_Tarea4.Shared.pdb": "sha256-TnwslqpT2Zs3pmcVWPpOfFImMKOnpmUjFwQMxADYlyk=",
+      "Migracion_Tarea1_Hasta_Tarea4.Client.pdb": "sha256-a+nLxXDBMZRjK7tyu93TwFBf1cTlnwkQtwskJHZHlOY="
     },
     "runtime": {
       "dotnet.7.0.10.eeywd9v74c.js": "sha256-qJB30QURoyH3y3WyayHu6nMFIx2XNOkXCez7tagGpvE=",
