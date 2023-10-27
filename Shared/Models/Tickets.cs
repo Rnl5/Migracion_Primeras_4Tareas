@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 public class Tickets
 {
@@ -7,6 +8,15 @@ public class Tickets
 
     [Required(ErrorMessage ="Debe de insertar una Fecha")]
     public DateTime Fecha {get; set;} = DateTime.Now;
+
+    [ForeignKey("ClienteId")]
+    public int ClienteId {get; set;}
+
+    [ForeignKey("SistemaId")]
+    public int SistemaId {get; set;}
+
+    [ForeignKey("PrioridadId")]
+    public int PrioridadId {get; set;}
 
     [Required(ErrorMessage ="El campo {0} es obligatorio")]
     [StringLength(40, ErrorMessage ="Ha insertado mas de {1} caracteres")]
