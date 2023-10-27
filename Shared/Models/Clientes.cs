@@ -22,7 +22,6 @@ public class Clientes
 
     [Required(ErrorMessage ="El campo {0} es obligatorio")]
     [StringLength(12, MinimumLength =11, ErrorMessage ="El {0} debe de contener minimo {2} caracteres y maximo {1} caracteres")]
-    [RegularExpression(@"^[0-9]{11-12}+$", ErrorMessage ="El RNC deben de ser numeros")]
     public string Rnc {get; set;} = string.Empty;
 
     [Required(ErrorMessage ="El campo {0} es obligatorio")]
