@@ -16,7 +16,6 @@
             </div>
 
             <div class ="card-body">
-                <body>
                     <label>Id</label>
                     <div class="col-3">
                         <div class="input-group mb-3">
@@ -27,7 +26,7 @@
                     
                             <label>Nombre</label>
                             <div class="input-group mb-3">
-                                <InputTextArea class="form-control" @bind-Value="cliente.Nombre" aria-describedby="NombreCliente"></InputTextArea>
+                                <InputText class="form-control" @bind-Value="cliente.Nombre" aria-describedby="NombreCliente"></InputText>
                                 <ValidationMessage For="@(() => cliente.Nombre)"></ValidationMessage>
                             </div>
 
@@ -35,7 +34,7 @@
                             <div class="col">
                                 <label>Telefono</label>
                                 <div class="input-group mb-3">
-                                    <InputNumber class="form-control" @bind-Value="cliente.Telefono" aria-describedby="TelefonoCliente"></InputNumber>
+                                    <InputText class="form-control" @bind-Value="cliente.Telefono" aria-describedby="TelefonoCliente"></InputText>
                                     <ValidationMessage For="@(() => cliente.Telefono)"></ValidationMessage>
                                 </div>
                             </div>
@@ -43,7 +42,7 @@
                             <div class="col">
                                 <label>Celular</label>
                                 <div class="input-group mb-3">
-                                    <InputNumber class="form-control" @bind-Value="cliente.Celular" aria-describedby="CelularCliente"></InputNumber>
+                                    <InputText class="form-control" @bind-Value="cliente.Celular" aria-describedby="CelularCliente"></InputText>
                                     <ValidationMessage For="@(() => cliente.Celular)"></ValidationMessage>
                                 </div>
                             </div>
@@ -52,28 +51,28 @@
                             <div class="col">
                                 <label>Rnc</label>
                                 <div class="input-group mb-3">
-                                    <InputNumber class="form-control" @bind-Value="cliente.Rnc" aria-describedby="RncCliente"></InputNumber>
+                                    <InputText class="form-control" @bind-Value="cliente.Rnc" aria-describedby="RncCliente"></InputText>
                                     <ValidationMessage For="@(() => cliente.Rnc)"></ValidationMessage>
                                 </div>
                             </div>
 
                             <div class="row">
-                            <div class="col">
-                                <label>Email</label>
-                                <div class="input-group mb-3">
-                                    <InputNumber class="form-control" @bind-Value="cliente.Email" aria-describedby="EmailCliente"></InputNumber>
-                                    <ValidationMessage For="@(() => cliente.Email)"></ValidationMessage>
+                                <div class="col">
+                                    <label>Email</label>
+                                    <div class="input-group mb-3">
+                                        <InputText class="form-control" @bind-Value="cliente.Email" aria-describedby="EmailCliente"></InputText>
+                                        <ValidationMessage For="@(() => cliente.Email)"></ValidationMessage>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col">
-                                <label>Direccion</label>
-                                <div class="input-group mb-3">
-                                    <InputNumber class="form-control" @bind-Value="cliente.Direccion" aria-describedby="DireccionCliente"></InputNumber>
-                                    <ValidationMessage For="@(() => cliente.Direccion)"></ValidationMessage>
+                                <div class="col">
+                                    <label>Direccion</label>
+                                    <div class="input-group mb-3">
+                                        <InputText class="form-control" @bind-Value="cliente.Direccion" aria-describedby="DireccionCliente"></InputText>
+                                        <ValidationMessage For="@(() => cliente.Direccion)"></ValidationMessage>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
 
                     </div>
@@ -83,12 +82,10 @@
                         <button type ="submit" class="btn btn-outline-success"><i class="oi oi-document">Guardar</i></button>
                         <button type="button" class="btn btn-outline-danger" @onclick="Eliminar"><i class="oi oi-trash">Eliminar</i></button>
                     </div>
-                </body>
             </div>
         </div>
-    </div>
-    
 </EditForm>
+
 
 @code
 {
@@ -223,8 +220,12 @@
 
     public bool ValidarCasillasVacias()
     {
-        return string.IsNullOrEmpty(cliente.Descripcion) ||
-                cliente.DiasCompromiso == 0;
+        return string.IsNullOrEmpty(cliente.Nombre) ||
+                string.IsNullOrEmpty(cliente.Telefono) ||
+                string.IsNullOrEmpty(cliente.Celular) ||
+                string.IsNullOrEmpty(cliente.Rnc) ||
+                string.IsNullOrEmpty(cliente.Email) ||
+                string.IsNullOrEmpty(cliente.Direccion);
     }
 
     public bool Validar()
