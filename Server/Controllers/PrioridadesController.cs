@@ -69,7 +69,7 @@ namespace Migracion_Tarea1_Hasta_Tarea4.Server.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PrioridadesExists(id))
+                if (!PrioridadesIDExists(id))
                 {
                     return NotFound();
                 }
@@ -87,7 +87,7 @@ namespace Migracion_Tarea1_Hasta_Tarea4.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Prioridades>> PostPrioridades(Prioridades prioridades)
         {
-          if (!PrioridadesExists(prioridades.PrioridadId))
+          if (!PrioridadesIDExists(prioridades.PrioridadId))
           {
               _context.Prioridades.Add(prioridades);
           }
@@ -120,9 +120,18 @@ namespace Migracion_Tarea1_Hasta_Tarea4.Server.Controllers
             return NoContent();
         }
 
-        private bool PrioridadesExists(int id)
+        private bool PrioridadesIDExists(int id)
         {
             return (_context.Prioridades?.Any(e => e.PrioridadId == id)).GetValueOrDefault();
+        }
+
+        public bool ExisteDatos(Prioridades prioridades)
+        {
+            var mismosDatos = _context.Prioridades.Any(p => p.PrioridadId == prioridades.PrioridadId ||
+                (p.Descripcion == prioridades.Descripcion)
+            );
+
+            return mismosDatos;
         }
     }
 }
