@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Migracion_Tarea1_Hasta_Tarea4.Server.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20231026154454_Inicial")]
-    partial class Inicial
+    [Migration("20231027014340_Actualizando modelo")]
+    partial class Actualizandomodelo
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
