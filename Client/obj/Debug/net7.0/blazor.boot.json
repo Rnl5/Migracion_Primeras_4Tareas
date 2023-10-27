@@ -200,15 +200,15 @@
       "mscorlib.dll": "sha256-Xo3wdLenBZ41X73hGjkWTbEQZDKcQsnPFtlkePUxLY0=",
       "netstandard.dll": "sha256-qjqaAEP3hdLnU\/TnoCd8HaSa+0ruV1TpdaB2GUujGMw=",
       "System.Private.CoreLib.dll": "sha256-\/7uQ+eNo9u3H1mpgMko4D3tKZHeGRfsRjna0Dqsu62k=",
-      "Migracion_Tarea1_Hasta_Tarea4.Shared.dll": "sha256-3ThcENwK4AUcZLXIlZROVDR7irbkctL6wXPPieSyhE8=",
-      "Migracion_Tarea1_Hasta_Tarea4.Client.dll": "sha256-xFLOc6dqSdiTTDD9MvOxi+5D8BVhPCGvomcn+mwVNAs="
+      "Migracion_Tarea1_Hasta_Tarea4.Shared.dll": "sha256-MynCtobf\/i8MbWzyUJRfXBFMG0GJN6ydc1+wbO0aspY=",
+      "Migracion_Tarea1_Hasta_Tarea4.Client.dll": "sha256-iP3frroQMooAMbFanQemBO16Kj2C6R2pykhTph2aXiE="
     },
     "extensions": null,
     "lazyAssembly": null,
     "libraryInitializers": null,
     "pdb": {
-      "Migracion_Tarea1_Hasta_Tarea4.Shared.pdb": "sha256-abVu4YGuMnXAU\/Py7ADz6d74tRqi9SiqmV9BE9+4rxI=",
-      "Migracion_Tarea1_Hasta_Tarea4.Client.pdb": "sha256-XeLggUhUJIwrR58cCbhbbhNK5IxgIH69FM1oHsX7YcU="
+      "Migracion_Tarea1_Hasta_Tarea4.Shared.pdb": "sha256-oyuzTXFJZW73FCM+O0vl+Tu51G+WFuDdYgdhADDHjMY=",
+      "Migracion_Tarea1_Hasta_Tarea4.Client.pdb": "sha256-YDWmdE8jU1ha40DyYO91rxbrAX1gDFRNceg4eSxCxHA="
     },
     "runtime": {
       "dotnet.7.0.10.eeywd9v74c.js": "sha256-qJB30QURoyH3y3WyayHu6nMFIx2XNOkXCez7tagGpvE=",
