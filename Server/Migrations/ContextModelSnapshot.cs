@@ -73,6 +73,21 @@ namespace Migracion_Tarea1_Hasta_Tarea4.Server.Migrations
                     b.ToTable("Prioridades");
                 });
 
+            modelBuilder.Entity("Sistemas", b =>
+                {
+                    b.Property<int>("SistemaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("SistemaId");
+
+                    b.ToTable("Sistemas");
+                });
+
             modelBuilder.Entity("Tickets", b =>
                 {
                     b.Property<int>("TicketId")
@@ -84,6 +99,9 @@ namespace Migracion_Tarea1_Hasta_Tarea4.Server.Migrations
                         .HasMaxLength(70)
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("ClienteId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Descripcion")
                         .IsRequired()
                         .HasMaxLength(80)
@@ -91,6 +109,12 @@ namespace Migracion_Tarea1_Hasta_Tarea4.Server.Migrations
 
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("PrioridadId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("SistemaId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("SolicitadoPor")
                         .IsRequired()
