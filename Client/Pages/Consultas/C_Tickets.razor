@@ -1,5 +1,6 @@
 @page "/consultaTickets"
 
+@inject NotificationService notificationService
 @inject HttpClient httpClient
 
 <div class="container">
@@ -62,7 +63,7 @@
                             {
                                 <tr>
                                     <td>@ticket.TicketId</td>
-                                    <td>@ticket.Fecha</td>
+                                    <td>@ticket.Fecha.ToString("dd/MM/yyyy")</td>
                                     <td>@ticket.SolicitadoPor</td>
                                     <td>@ticket.Asunto</td>
                                     <td>@ticket.Descripcion</td>
@@ -106,6 +107,18 @@
 
     public async Task Buscar()
     {
+        if (ticketId < 0)
+        {
+            var Mensaje = new NotificationMessage 
+            {
+                Severity = NotificationSeverity.Error,
+                Summary = "Error: No existe un Id negativo",
+                Detail = "Revise el numero insertado (tiene que ser positivo)",
+                Duration = 6_000
+            };
+            notificationService.Notify(Mensaje);
+        }
+
         tickets = await httpClient.GetFromJsonAsync<List<Tickets>>($"api/Tickets");
 
         if (ticketId > 0)
