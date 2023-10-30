@@ -87,14 +87,22 @@ namespace Migracion_Tarea1_Hasta_Tarea4.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Clientes>> PostClientes(Clientes clientes)
         {
-          if (!ClientesIDExists(clientes.ClienteId))
-          {
-              _context.Clientes.Add(clientes);
-          }
-          else
-          {
-            _context.Clientes.Update(clientes);
-          }
+
+            if(ExistenDatos(clientes.Nombre, clientes.Rnc))
+            {
+                return BadRequest();
+            }
+
+            if (!ClientesIDExists(clientes.ClienteId))
+            {
+                _context.Clientes.Add(clientes);
+            }
+
+            else
+            {
+                _context.Clientes.Update(clientes);
+            }
+
             await _context.SaveChangesAsync();
 
             return Ok(clientes);
@@ -125,12 +133,10 @@ namespace Migracion_Tarea1_Hasta_Tarea4.Server.Controllers
             return (_context.Clientes?.Any(e => e.ClienteId == id)).GetValueOrDefault();
         }
 
-        public bool ExistenDatos(Clientes clientes)
+        public bool ExistenDatos(string nombre, string rnc)
         {
-            var existenDatos = _context.Clientes.Any(c => c.ClienteId == clientes.ClienteId ||
-                (c.Nombre == clientes.Nombre 
-                || c.Rnc == clientes.Rnc)
-            );
+            var existenDatos = (_context.Clientes.Any(c => c.Nombre == nombre ||
+                                                        c.Rnc == rnc));
 
             return existenDatos;
         }
