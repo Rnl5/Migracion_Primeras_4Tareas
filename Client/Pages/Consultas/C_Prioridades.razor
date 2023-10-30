@@ -79,9 +79,6 @@
      public int prioridadId{get; set;}
 
      public int Conteo {get; set;}
-
-
-    
     protected override async Task OnInitializedAsync()
     {
     }
@@ -106,6 +103,7 @@
         {
             prioridades = prioridades.Where(p => p.PrioridadId == prioridadId).ToList();
         }
+        Conteo = prioridades != null ? prioridades.Count : 0;
         StateHasChanged();
     }
 }

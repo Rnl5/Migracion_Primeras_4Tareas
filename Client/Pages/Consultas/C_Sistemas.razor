@@ -97,6 +97,7 @@
         {
             sistemas = sistemas.Where(s => s.SistemaId == sistemaId).ToList();
         }
+        Conteo = sistemas != null ? sistemas.Count : 0;
         StateHasChanged();   
     }
 }

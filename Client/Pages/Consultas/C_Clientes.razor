@@ -108,6 +108,7 @@
         {
             clientes = clientes.Where(c => c.ClienteId == clienteId).ToList();
         }
+        Conteo = clientes != null ? clientes.Count : 0;
         StateHasChanged();   
     }
 }
