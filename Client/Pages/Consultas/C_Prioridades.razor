@@ -1,5 +1,6 @@
 @page "/consultaPrioridades"
 
+@inject NotificationService notificationService
 @inject HttpClient httpClient
 
 <div class="container">
@@ -76,13 +77,36 @@
 
     public async Task Buscar()
     {
-        prioridades = await httpClient.GetFromJsonAsync<List<Prioridades>>($"api/Prioridades");
+        if (prioridadId < 0)
+        {
+            var Mensaje = new NotificationMessage 
+            {
+                Severity = NotificationSeverity.Error,
+                Summary = "Error: No existe un Id negativo",
+                Detail = "Revise el numero insertado (tiene que ser positivo)",
+                Duration = 6_000
+            };
+            notificationService.Notify(Mensaje);
+        }
 
+        if(prioridadId > prioridades.Count)
+        {
+            var Mensaje = new NotificationMessage 
+            {
+                Severity = NotificationSeverity.Error,
+                Summary = "Error: Id no existe",
+                Detail = "El Id buscado no existe",
+                Duration = 4_000
+            };
+            notificationService.Notify(Mensaje);
+        }   
+
+        prioridades = await httpClient.GetFromJsonAsync<List<Prioridades>>($"api/Prioridades");
+        
         if(prioridadId > 0)
         {
             prioridades = prioridades.Where(p => p.PrioridadId == prioridadId).ToList();
         }
-        StateHasChanged();   
+        StateHasChanged();
     }
-
 }
