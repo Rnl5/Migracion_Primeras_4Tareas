@@ -87,20 +87,20 @@ namespace Migracion_Tarea1_Hasta_Tarea4.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Prioridades>> PostPrioridades(Prioridades prioridades)
         {
-          if (!PrioridadesIDExists(prioridades.PrioridadId))
-          {
-              _context.Prioridades.Add(prioridades);
-          }
+            if(ExisteDescripcion(prioridades.Descripcion))
+            {
+                return BadRequest("La descripcion no existe");
+            }
 
-          else if(ExisteDescripcion(prioridades.Descripcion))
-          {
-            return BadRequest();
-          }
+            if (!PrioridadesIDExists(prioridades.PrioridadId))
+            {
+                _context.Prioridades.Add(prioridades);
+            }
 
-          else
-          {
-            _context.Prioridades.Update(prioridades);
-          }
+            else
+            {
+                _context.Prioridades.Update(prioridades);
+            }
             await _context.SaveChangesAsync();
 
             return Ok(prioridades);
