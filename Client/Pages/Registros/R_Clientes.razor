@@ -156,15 +156,26 @@
                 Detail = "Verifique si ha colocado el ID menor a 0",
                 Duration = 4_000
             };
-        notificationService.Notify(Mensaje);
-        return;
+            notificationService.Notify(Mensaje);
+            return;
         }
 
         using var response = await httpClient.PostAsJsonAsync("api/Clientes", cliente);
         
         if(!response.IsSuccessStatusCode)
         {
-            return;
+            if(response.StatusCode == HttpStatusCode.BadRequest)
+            {
+                Mensaje = new NotificationMessage
+                {
+                    Severity = NotificationSeverity.Error,
+                    Summary = "Error: Dato ya existente",
+                    Detail = "El dato insertado ya existe",
+                    Duration = 5_000
+                };
+                notificationService.Notify(Mensaje);
+                return;
+            }
         }
 
         var clienteDevuelto = await response.Content.ReadFromJsonAsync<Clientes>();
@@ -214,7 +225,7 @@
             Nuevo();
             Mensaje = new NotificationMessage 
             {
-                Severity = NotificationSeverity.Success,
+                Severity = NotificationSeverity.Warning,
                 Summary = "Cliente Eliminado",
                 Detail = "Se ha eliminado correctamente el cliente",
                 Duration = 4_000
