@@ -133,7 +133,7 @@
                 {
                     Severity = NotificationSeverity.Error,
                     Summary = "Error: Descripcion existente",
-                    Detail = "La descripcion insertada ya existe en la base de datos",
+                    Detail = "La descripcion insertada ya existe",
                     Duration = 4_000
                 };
                 notificationService.Notify(Mensaje);
@@ -172,7 +172,7 @@
                 Detail = "Hay una o varias casillas obligatorias vacias",
                 Duration = 4_000
             };
-        notificationService.Notify(Mensaje);
+            notificationService.Notify(Mensaje);
             return;
         }
 
@@ -207,5 +207,4 @@
     {
         return prioridad.PrioridadId < 0;
     }
-
 }
