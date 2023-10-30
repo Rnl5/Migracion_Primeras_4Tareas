@@ -60,6 +60,15 @@
 
             </body>
         </div>
+
+         <div class="card-footer">
+            <div class="form-row justify-content-sm-between" aria-orientation="vertical">
+                <div class="col-2">
+                    <label for="CantidadFilas" class="col-form-label"><strong>Num. Filas</strong>&nbsp;</label>
+                    <input id="CantidadFilas" @bind-value="@Conteo" disabled class="form-control" />
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -68,6 +77,8 @@
 {
     public List<Prioridades> prioridades {get; set;} = new List<Prioridades>();
      public int prioridadId{get; set;}
+
+     public int Conteo {get; set;}
 
 
     
@@ -88,18 +99,6 @@
             };
             notificationService.Notify(Mensaje);
         }
-
-        if(prioridadId > prioridades.Count)
-        {
-            var Mensaje = new NotificationMessage 
-            {
-                Severity = NotificationSeverity.Error,
-                Summary = "Error: Id no existe",
-                Detail = "El Id buscado no existe",
-                Duration = 4_000
-            };
-            notificationService.Notify(Mensaje);
-        }   
 
         prioridades = await httpClient.GetFromJsonAsync<List<Prioridades>>($"api/Prioridades");
         
