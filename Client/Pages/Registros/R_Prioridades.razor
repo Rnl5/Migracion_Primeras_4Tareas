@@ -78,7 +78,7 @@
     public async Task Buscar()
     {
         var prioridadEncontrada = await httpClient.GetFromJsonAsync<Prioridades>($"api/Prioridades/{prioridad.PrioridadId}");
-        
+
         if(prioridadEncontrada != null)
         {
             prioridad = prioridadEncontrada;
@@ -99,7 +99,7 @@
     {
         if(ValidarCasillasVacias())
         {
-           Mensaje = new NotificationMessage 
+            Mensaje = new NotificationMessage 
             {
                 Severity = NotificationSeverity.Error,
                 Summary = "Error: Casilla/s vacia/s",
@@ -119,15 +119,26 @@
                 Detail = "Verifique si ha colocado el ID menor a 0",
                 Duration = 4_000
             };
-        notificationService.Notify(Mensaje);
-        return;
+            notificationService.Notify(Mensaje);
+            return;
         }
 
         using var response = await httpClient.PostAsJsonAsync("api/Prioridades", prioridad);
-        
+
         if(!response.IsSuccessStatusCode)
         {
-            return;
+            if(response.StatusCode == HttpStatusCode.BadRequest)
+            {
+                Mensaje = new NotificationMessage 
+                {
+                    Severity = NotificationSeverity.Error,
+                    Summary = "Error: Descripcion existente",
+                    Detail = "La descripcion insertada ya existe en la base de datos",
+                    Duration = 4_000
+                };
+                notificationService.Notify(Mensaje);
+                return;
+            }
         }
 
         var prioridadDevuelta = await response.Content.ReadFromJsonAsync<Prioridades>();
@@ -177,7 +188,7 @@
             Nuevo();
             Mensaje = new NotificationMessage 
             {
-                Severity = NotificationSeverity.Success,
+                Severity = NotificationSeverity.Warning,
                 Summary = "Prioridad Eliminada",
                 Detail = "Se ha eliminado correctamente la prioridad",
                 Duration = 4_000
