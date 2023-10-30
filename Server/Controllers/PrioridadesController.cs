@@ -91,6 +91,12 @@ namespace Migracion_Tarea1_Hasta_Tarea4.Server.Controllers
           {
               _context.Prioridades.Add(prioridades);
           }
+
+          else if(ExisteDescripcion(prioridades.Descripcion))
+          {
+            return BadRequest();
+          }
+
           else
           {
             _context.Prioridades.Update(prioridades);
@@ -125,11 +131,9 @@ namespace Migracion_Tarea1_Hasta_Tarea4.Server.Controllers
             return (_context.Prioridades?.Any(e => e.PrioridadId == id)).GetValueOrDefault();
         }
 
-        public bool ExisteDatos(Prioridades prioridades)
+        public bool ExisteDescripcion(string descripcion)
         {
-            var mismosDatos = _context.Prioridades.Any(p => p.PrioridadId == prioridades.PrioridadId ||
-                (p.Descripcion == prioridades.Descripcion)
-            );
+            var mismosDatos = _context.Prioridades.Any(p => (p.Descripcion == descripcion));
 
             return mismosDatos;
         }
