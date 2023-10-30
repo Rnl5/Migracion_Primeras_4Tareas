@@ -1,5 +1,6 @@
 @page "/consultaClientes"
 
+@inject NotificationService notificationService
 @inject HttpClient httpClient
 
 <div class="container">
@@ -64,6 +65,15 @@
                 }
             </body>
         </div>
+
+         <div class="card-footer">
+            <div class="form-row justify-content-sm-between" aria-orientation="vertical">
+                <div class="col-2">
+                    <label for="CantidadFilas" class="col-form-label"><strong>Num. Filas</strong>&nbsp;</label>
+                    <input id="CantidadFilas" @bind-value="@Conteo" disabled class="form-control" />
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -72,12 +82,26 @@
 {
     public List<Clientes> clientes {get; set;} = new List<Clientes>();
      public int clienteId{get; set;}
+
+     public int Conteo {get; set;}
     
     protected override async Task OnInitializedAsync()
     {}
 
     public async Task Buscar()
     {
+        if (clienteId < 0)
+        {
+            var Mensaje = new NotificationMessage 
+            {
+                Severity = NotificationSeverity.Error,
+                Summary = "Error: No existe un Id negativo",
+                Detail = "Revise el numero insertado (tiene que ser positivo)",
+                Duration = 6_000
+            };
+            notificationService.Notify(Mensaje);
+        }
+
         clientes = await httpClient.GetFromJsonAsync<List<Clientes>>($"api/Clientes");
 
         if(clienteId > 0)

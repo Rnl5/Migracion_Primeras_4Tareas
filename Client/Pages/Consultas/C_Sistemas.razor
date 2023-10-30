@@ -1,5 +1,6 @@
 @page "/consultaSistemas"
 
+@inject NotificationService notificationService
 @inject HttpClient httpClient
 
 <div class="container">
@@ -53,6 +54,15 @@
                 }
             </body>
         </div>
+
+         <div class="card-footer">
+            <div class="form-row justify-content-sm-between" aria-orientation="vertical">
+                <div class="col-2">
+                    <label for="CantidadFilas" class="col-form-label"><strong>Num. Filas</strong>&nbsp;</label>
+                    <input id="CantidadFilas" @bind-value="@Conteo" disabled class="form-control" />
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -62,11 +72,25 @@
     public List<Sistemas> sistemas {get; set;} = new List<Sistemas>();
     public int sistemaId {get; set;}
 
+    public int Conteo {get; set;}
+
     protected override async Task OnInitializedAsync()
     { }
 
     public async Task Buscar()
     {
+        if (sistemaId < 0)
+        {
+            var Mensaje = new NotificationMessage 
+            {
+                Severity = NotificationSeverity.Error,
+                Summary = "Error: No existe un Id negativo",
+                Detail = "Revise el numero insertado (tiene que ser positivo)",
+                Duration = 6_000
+            };
+            notificationService.Notify(Mensaje);
+        }
+
         sistemas = await httpClient.GetFromJsonAsync<List<Sistemas>>($"api/Sistemas");
 
         if(sistemaId > 0)
