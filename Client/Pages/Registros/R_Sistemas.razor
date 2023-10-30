@@ -25,7 +25,7 @@
                             <button class="btn btn-outline-primary" @onclick="Buscar"><i class="oi oi-magnifying-glass"></i></button>
                         </div>
                     </div>
-                        <div class="col">
+                        <div class="col-5">
                             <label>Nombre</label>
                             <div class="input-group mb-3">
                                 <InputTextArea class="form-control" @bind-Value="sistema.Nombre" aria-describedby="NombreSistema"></InputTextArea>
@@ -167,7 +167,7 @@
             Nuevo();
             Mensaje = new NotificationMessage 
             {
-                Severity = NotificationSeverity.Success,
+                Severity = NotificationSeverity.Warning,
                 Summary = "Sistema Eliminado",
                 Detail = "Se ha eliminado correctamente el sistema",
                 Duration = 4_000
